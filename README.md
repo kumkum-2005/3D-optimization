@@ -1,4 +1,4 @@
-﻿# 3D-Optimization-Parameters
+
 ## 3D Model Optimization Parameters
 
 The system uses several geometric and optimization parameters to improve
@@ -77,3 +77,52 @@ Voxel Size       = 0.002
 Poisson Depth    = 7
 Laplacian        = 4 iterations
 Taubin           = 5 iterations
+
+## Optimization Flow
+
+Input STL
+    │
+    ▼
+Mesh Feature Extraction
+    │
+    ├── Vertices
+    ├── Triangles
+    └── Surface Area
+    │
+    ▼
+Random Forest Model
+    │
+    ▼
+Predicted Parameters
+    │
+    ├── Voxel Size
+    ├── Poisson Depth
+    ├── Laplacian Iterations
+    └── Taubin Iterations
+    │
+    ▼
+Mesh Optimization
+    │
+    ├── Mesh Cleaning
+    ├── Point Cloud Processing
+    ├── Poisson Reconstruction
+    ├── Laplacian Smoothing
+    ├── Taubin Smoothing
+    └── Final Mesh Cleaning
+    │
+    ▼
+Optimized STL
+
+
+### Important correction for your project
+
+Aap README me **"Scanning Resolution"** ko direct AI parameter mat likhiye. Aapke current code me iska practical control **`Voxel Size`** ke through ho raha hai.
+
+Similarly:
+
+- **Point Cloud Density** → `sample_count` + `voxel_size`
+- **Noise Reduction** → mesh cleaning + Poisson reconstruction + smoothing
+- **Processing Time** → abhi metric ke roop me measure karna hoga
+- **Storage Efficiency** → `simplify_quadric_decimation()` use ho raha hai, lekin percentage reduction ko explicitly calculate karna hoga
+
+Isliye README me **actual implemented parameters** aur **evaluation metrics** ko alag rakhna professional rahega.
